@@ -1,6 +1,8 @@
 # ngx-restful
 > Angular library for easy integration with RESTful APIs.
 
+This package is refactored [ng5-restful](https://github.com/Lujo5/ng5-restful) in a way to use and support newest Angular 6 and RxJs 6 features.
+
 Minimum required versions of dependencies:
 * `@angular/core`: `>=6.0.0`
 * `@angular/common`: `>=6.0.0`
