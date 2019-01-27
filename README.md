@@ -16,7 +16,7 @@ npm install ngx-restful --save
 ```
 
 ## Usage
-This library **does not** contains an Angular5 module with exported components and service, but instead, provides two classes:
+This library **does not** contains an Angular module with exported components and service, but instead, provides two classes:
 * **RestService\<T, E>** - an abstract class which your services need to extend in order to use provided REST methods
 * **GenericResponse** - model class that can be returned from custom GET and POST requests performed from RestService (can be replaced with custom model)
 
@@ -46,6 +46,7 @@ export class Article {
 When model class is implemented, then REST service for that particular resource (model) can be created. 
 Create new class as service with Angular annotation @Injectable() which extends RestService, then create constructor
 and implement abstract methods getBaseUrlPath(): string and getHttpClient(): HttpClient.
+Generic type T represents the resource model in Angular application, type E is the response model from API.
 
 Example typescript service class (services/article.service.ts):
 ``` javascript
@@ -135,6 +136,14 @@ export class ArticleComponent implements OnInit {
         this.articleService.query({params: {typeId: 3, page: 1, limit: 10}}).subscribe((articles: Article[]) => {
             this.articles = articles;
         });
+
+        // Get one page with full response object
+        this.articleService.getPage({params: {page: 1, limit: 10, order: 'desc'}}).subscribe((response: GenericResponse) => {
+            if (response.success) {
+                console.log("Total items: " + response.data.get('total');
+                this.articles = response.data.get('items');
+            }
+        });
         
         // Get one article with provided id
         this.articleService.getOne(5).subscribe((article: Article) => {
@@ -143,7 +152,7 @@ export class ArticleComponent implements OnInit {
         
         // Create new article with provided article model object
         this.articleService.createOne(this.newArticle).subscribe((response: GenericResponse) => {
-            if (repsonse.success) {
+            if (response.success) {
                 console.log("Article created! Message: " + response.message);
                 console.log("New article id is: " + response.data.get('id');
             } else {
@@ -153,7 +162,7 @@ export class ArticleComponent implements OnInit {
         
         // Update one article with provided article model object which must have id
         this.articleService.updateOne(this.article).subscribe((response: GenericResponse) => {
-            if (repsonse.success) {
+            if (response.success) {
                 console.log("Article updated! Message: " + response.message);
             } else {
                 console.log("Failed updating article");
@@ -162,7 +171,7 @@ export class ArticleComponent implements OnInit {
         
         // Delete one article with provided id
         this.articleService.deleteOne(this.article.id).subscribe((response: GenericResponse) => {
-            if (repsonse.success) {
+            if (response.success) {
                 console.log("Article deleted! Message: " + response.message);
             } else {
                 console.log("Failed deleting article");
@@ -171,7 +180,7 @@ export class ArticleComponent implements OnInit {
         
         // Custom service request
         this.articleService.nonRESTfulRequest(this.article.id).subscribe((response: GenericResponse) => {
-            if (repsonse.success) {
+            if (response.success) {
                 console.log("Request successful! Message: " + response.message);
                 console.log("Returned someValue: " + response.data.get('someValue')):
             } else {
@@ -191,6 +200,7 @@ Complete overview of all available methods provided by RestService:
 | put             | path: string, body: any, *options: object        | PUT         | path | Observable\<E>   |
 | delete          | path: string, *options: object                   | DELETE      | path | Observable\<E>   |
 | query           | *options: object, *path: string                  | GET         | /    | Observable\<T[]> |
+| getPage         | *options: object, *path: string                  | GET         | /    | Observable\<E>   |
 | getAll          | *path: string                                    | GET         | /    | Observable\<T[]> |
 | getOne          | id: number, *options: object, *path: string      | GET         | /id  | Observable\<T>   |
 | createOne       | model: T, *options: object, *path: string        | POST        | /    | Observable\<E>   |

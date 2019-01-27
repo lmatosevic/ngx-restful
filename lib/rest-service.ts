@@ -18,6 +18,12 @@ export abstract class RestService<T, E> extends BaseService {
             .pipe(map((response: HttpResponse<T[]>) => response), catchError(this.handleError));
     }
 
+    public getPage(options: Object = {}, path: string = null): Observable<E> {
+        let finalPath = path != null ? path : this.getBaseUrlPath();
+        return this.http.get(finalPath, options)
+            .pipe(map((response: HttpResponse<E>) => response), catchError(this.handleError));
+    }
+
     public getAll(path: string = null): Observable<T[]> {
         return this.query({}, path);
     }
