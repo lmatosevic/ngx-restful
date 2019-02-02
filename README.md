@@ -194,7 +194,7 @@ export class ArticleComponent implements OnInit {
 Complete overview of all available methods provided by RestService:
 
 | Service method  | Arguments                                    | HTTP method | URL  | Return type                   |
-|:----------------|:--------------------------------------- -----|:------------|:-----|:------------------------------|
+|:----------------|:---------------------------------------------|:------------|:-----|:------------------------------|
 | get             | path: string, *options: object               | GET         | path | Observable\<E>                |
 | post            | path: string, body: any, *options: object    | POST        | path | Observable\<E>                |
 | put             | path: string, body: any, *options: object    | PUT         | path | Observable\<E>                |
