@@ -12,10 +12,10 @@ export abstract class RestService<T, E> extends BaseService {
         this.http = http;
     }
 
-    public query(options: Object = {}, path: string = null): Observable<T[]> {
+    public query(options: Object = {}, path: string = null): Observable<T[] | T> {
         let finalPath = path != null ? path : this.getBaseUrlPath();
         return this.http.get(finalPath, options)
-            .pipe(map((response: HttpResponse<T[]>) => response), catchError(this.handleError));
+            .pipe(map((response: HttpResponse<T[] | T>) => response), catchError(this.handleError));
     }
 
     public getResponse(options: Object = {}, path: string = null): Observable<HttpResponse<T>> {
@@ -25,7 +25,7 @@ export abstract class RestService<T, E> extends BaseService {
             .pipe(map((response: HttpResponse<T>) => response), catchError(this.handleError));
     }
 
-    public getAll(path: string = null): Observable<T[]> {
+    public getAll(path: string = null): Observable<T[] | T> {
         return this.query({}, path);
     }
 
