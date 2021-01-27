@@ -1,4 +1,4 @@
-export class ResourceResponseBase {
+class ResourceResponseBase {
     success: boolean;
     message: string;
     total_count: number;
