@@ -103,6 +103,28 @@ export class GenericResponse {
 }
 ```
 
+Also, since version 1.3.0 the two new generic responses have been introduced:
+* For single resource response with metadata:
+``` javascript
+export class ResourceResponse<T> {
+    success: boolean;
+    message: string;
+    data: T;
+}
+```
+
+* For the array of resources response with metadata for pagination:
+``` javascript
+export class ResourceResponseList<T> {
+    success: boolean;
+    message: string;
+    total_count: number;
+    total_pages: number;
+    result_count: number;
+    data: Array<T> = [];
+}
+```
+
 ### Interacting with API
 To use your newly created and implemented service, just inject service into the Angular @Component's constructor
 and use it as follows:
