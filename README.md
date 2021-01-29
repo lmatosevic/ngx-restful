@@ -19,6 +19,8 @@ npm install ngx-restful --save
 This library **does not** contains an Angular module with exported components and service, but instead, provides two classes:
 * **RestService\<T, E>** - an abstract class which your services need to extend in order to use provided REST methods
 * **GenericResponse** - model class that can be returned from custom GET and POST requests performed from RestService (can be replaced with custom model)
+* **ResourceResponse** - model class for single resource object with metadata
+* **ResourceResponseList** - model class for multiple resource objects with metadata
 
 Using this RESTful pattern classes allows you to follow best practices for transferring and mapping entity objects from server to your client application. 
 And also, provides a level of consistency to your Angular application.
