@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lujo5/ngx-restful.git"
+    "url": "git+https://github.com/lmatosevic/ngx-restful.git"
   },
   "keywords": [
     "angular",
@@ -47,8 +47,8 @@
     "rollup-plugin-typescript": "^0.8.1",
     "typescript": "~2.9.1"
   },
-  "homepage": "https://github.com/Lujo5/ngx-restful#readme",
+  "homepage": "https://github.com/lmatosevic/ngx-restful#readme",
   "bugs": {
-    "url": "https://github.com/Lujo5/ngx-restful/issues"
+    "url": "https://github.com/lmatosevic/ngx-restful/issues"
   }
 }
